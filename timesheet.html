@@ -1,0 +1,246 @@
+<html> 
+<head><title>Timesheet</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<header class="w3-container w3-black" style="text-align: center;">
+ <h1><b>Employee Timesheet</b></h1> 
+</header>
+<style type="text/css">
+input{
+  width: 100px;
+}
+
+
+.printMe {display: none;}
+            @media print {
+            .printMe {display: block;}
+            .a{display: none;}
+            
+            }
+
+            </style>
+</head> 
+<body style="background: url(bg1.jpg) no-repeat center center fixed; background-size: cover;"> 
+<div style="width: 100%; text-align: center;"> 
+<form name="Timesheet"> 
+<p><input class="w3-input w3-border" type="text" placeholder="Name" name="name" style="width: 40%;float: left;margin:0 10px" required></p>
+    <p><input class="w3-input w3-border" type="email" placeholder="Email" name="email" style="width: 40%;float: left;margin-right:10px" required></p>
+    <p><input class="w3-input w3-border" type="text" name="pay" maxlength="4" placeholder="$/hour" style="width: 10%" value="" required></p>
+    <p><input class="w3-input w3-border" type="month" name="month" placeholder="month" style="width: 20%;float: left;margin:10px 10px;" value="2017-04" required></p>
+    <p><input class="w3-input w3-border" type="week" name="week" placeholder="week" style="width: 20%;float:left;margin:10px 50px 10px 10px;" value="2017-W14" required></p>
+    <p><input class="w3-input w3-border" type="date" name="startdate" placeholder="startdate" style="width: 20%;float:left;margin:10px 10px;" value="2017-04-10" required></p><p style="color: white;float: left;font-weight: bold;">-</p>      
+    <p><input class="w3-input w3-border" type="date" name="enddate" placeholder="enddate" style="width: 20%;float: left;margin:10px 10px;" value="2017-04-16" required></p>
+
+<table class="w3-table-all w3-centered w3-large" style="text-align: center;"> 
+<tr class="w3-grey"><th>Day of Week</th><th>TimeIn</th><th>TimeOut</th><th>Hours</th></tr> 
+
+<tr><td>Monday</td>
+<td><input type="text" id="MondayTimeIn" name="MondayTimeIn" value="" onkeyup="diff()"></td><td><input type="text" id="MondayTimeOut" name="MondayTimeOut" value="" onkeyup="diff()"></td>
+<td><input type="number" id="Monday" name="Monday" readonly="readonly" size="5" maxlength="6" value=""> 
+</td></tr> 
+
+
+<tr><td>Tuesday</td>
+<td><input type="text" id="TuesdayTimeIn" name="TuesdayTimeIn" value="" onkeyup="diff()"></td><td><input type="text" id="TuesdayTimeOut" name="TuesdayTimeOut" value="" onkeyup="diff()"></td>
+<td><input type="number" id="Tuesday" name="Tuesday" readonly="readonly" size="5" maxlength="4" value=""> 
+</td></tr> 
+
+
+<tr><td>Wednesday</td>
+<td><input type="text" id="WednesdayTimeIn" name="WednesdayTimeIn" value="" onkeyup="diff()"></td><td><input type="text" id="WednesdayTimeOut" name="WednesdayTimeOut" value="" onkeyup="diff()"></td>
+<td><input type="number" id="Wednesday" name="Wednesday" readonly="readonly" size="5" maxlength="4" value=""> 
+</td></tr> 
+
+
+<tr><td>Thursday</td>
+<td><input type="text" id="ThursdayTimeIn" name="ThursdayTimeIn" value="" onkeyup="diff()"></td><td><input type="text" id="ThursdayTimeOut" name="ThursdayTimeOut" value="" onkeyup="diff()"></td> 
+<td><input type="number" id="Thursday" name="Thursday" readonly="readonly" size="5" maxlength="5" value=""> 
+</td></tr> 
+
+
+<tr><td>Friday</td>
+<td><input type="text" id="FridayTimeIn" name="FridayTimeIn" value="" onkeyup="diff()"></td><td><input type="text" id="FridayTimeOut" name="FridayTimeOut" value="" onkeyup="diff()"></td> 
+<td><input type="number" id="Friday" name="Friday" readonly="readonly" size="5" maxlength="4" value=""> 
+</td></tr> 
+
+
+<tr><td>Saturday</td>
+<td><input type="text" id="SaturdayTimeIn" name="SaturdayTimeIn" value="" onkeyup="diff()"></td><td><input type="text" id="SaturdayTimeOut" name="SaturdayTimeOut" value="" onkeyup="diff()"></td>
+<td><input type="number" id="Saturday" name="Saturday" readonly="readonly" size="5" maxlength="4" value=""> 
+</td></tr> 
+
+
+<tr><td>Sunday</td>
+<td><input type="text" id="SundayTimeIn" name="SundayTimeIn" value="" onkeyup="diff()"></td><td><input type="text" id="SundayTimeOut" name="SundayTimeOut" value="" onkeyup="diff()"></td>
+<td><input type="number" id="Sunday" name="Sunday" readonly="readonly" size="5" maxlength="4" value=""> 
+</td></tr> 
+
+
+<tr><td>Weekly Total</td><td></td><td></td>  
+<td><input class="right" type="number" name="Total" readonly="readonly" size="5" value=""> 
+</td></tr> 
+
+<tr><td>Reported as:</td><td></td> <td></td> 
+<td><input type="number" name="ReportTime" id="ReportTime" readonly="readonly" size="5" value=""> 
+</td></tr> 
+
+</table><br><div class="a">
+        <button class="w3-button w3-light-grey w3-padding-large w3-ripple w3-round" type="submit" name="submit" value="Send">
+          <i class="fa fa-paper-plane"></i> SEND TIMESHEET
+        </button>
+      <button class="w3-button w3-light-grey w3-padding-large w3-ripple w3-round" type="button" onclick="myFunction()">
+          <i class="fa fa-print"></i> PRINT
+        </button></div><br><br>
+        <div class="printMe" style="border-top: 1px solid black;width: 200px;text-align: center;">Manager's Approval</div>
+</form> 
+
+<script type="text/javascript" language="javascript"> 
+
+var StartEnd = new Array('MondayTimeIn','MondayTimeOut','TuesdayTimeIn','TuesdayTimeOut','WednesdayTimeIn','WednesdayTimeOut','ThursdayTimeIn','ThursdayTimeOut','FridayTimeIn','FridayTimeOut','SaturdayTimeIn','SaturdayTimeOut','SundayTimeIn','SundayTimeOut'); 
+
+function diff(){ 
+
+errMsg = -1; 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+  
+MondayTimeIn = document.Timesheet.MondayTimeIn.value; 
+MondayTimeIn = MondayTimeIn.split(":");
+var mondaystartDate = new Date(0, 0, 0, MondayTimeIn[0], MondayTimeIn[1], 0); if ((MondayTimeIn[0] > 24) || (MondayTimeIn[1] > 59)) {errMsg=0}
+MondayTimeOut = document.Timesheet.MondayTimeOut.value; 
+MondayTimeOut = MondayTimeOut.split(":"); 
+var mondayendDate = new Date(0, 0, 0, MondayTimeOut[0], MondayTimeOut[1], 0); if ((MondayTimeOut[0] > 24) || (MondayTimeOut[1] > 59)) {errMsg=1}
+var mondaydiff = mondayendDate.getTime() - mondaystartDate.getTime();
+var mondayhours = Math.floor(mondaydiff / 1000 / 60 / 60);
+mondaydiff -= mondayhours * 1000 * 60 * 60;
+var mondayminutes = Math.floor(mondaydiff / 1000 / 60);
+document.Timesheet.Monday.value = (mondayhours < 9 ? "0" : "") + mondayhours + "." + (mondayminutes < 9 ? "0" : "") + mondayminutes;
+
+
+TuesdayTimeIn = document.Timesheet.TuesdayTimeIn.value;
+TuesdayTimeIn = TuesdayTimeIn.split(":"); 
+var tuesdaystartDate = new Date(0, 0, 0, TuesdayTimeIn[0], TuesdayTimeIn[1], 0); if ((TuesdayTimeIn[0] > 24) || (TuesdayTimeIn[1] > 59)) {errMsg=2} 
+TuesdayTimeOut = document.Timesheet.TuesdayTimeOut.value;   
+TuesdayTimeOut = TuesdayTimeOut.split(":");
+var tuesdayendDate = new Date(0, 0, 0, TuesdayTimeOut[0], TuesdayTimeOut[1], 0); if ((TuesdayTimeOut[0] > 24) || (TuesdayTimeOut[1] > 59)) {errMsg=3}
+var tuesdaydiff = tuesdayendDate.getTime() - tuesdaystartDate.getTime();
+var tuesdayhours = Math.floor(tuesdaydiff / 1000 / 60 / 60);
+tuesdaydiff -= tuesdayhours * 1000 * 60 * 60;
+var tuesdayminutes = Math.floor(tuesdaydiff / 1000 / 60);
+document.Timesheet.Tuesday.value = (tuesdayhours < 9 ? "0" : "") + tuesdayhours + "." + (tuesdayminutes < 9 ? "0" : "") + tuesdayminutes;
+
+
+WednesdayTimeIn = document.Timesheet.WednesdayTimeIn.value;
+WednesdayTimeIn = WednesdayTimeIn.split(":"); 
+var wednesdaystartDate = new Date(0, 0, 0, WednesdayTimeIn[0], WednesdayTimeIn[1], 0); if ((WednesdayTimeIn[0] > 24) || (WednesdayTimeIn[1] > 59)) {errMsg=4} 
+WednesdayTimeOut = document.Timesheet.WednesdayTimeOut.value;   
+WednesdayTimeOut = WednesdayTimeOut.split(":");
+var wednesdayendDate = new Date(0, 0, 0, WednesdayTimeOut[0], WednesdayTimeOut[1], 0); if ((WednesdayTimeOut[0] > 24) || (WednesdayTimeOut[1] > 59)) {errMsg=5}
+var wednesdaydiff = wednesdayendDate.getTime() - wednesdaystartDate.getTime();
+var wednesdayhours = Math.floor(wednesdaydiff / 1000 / 60 / 60);
+wednesdaydiff -= wednesdayhours * 1000 * 60 * 60;
+var wednesdayminutes = Math.floor(wednesdaydiff / 1000 / 60);
+document.Timesheet.Wednesday.value = (wednesdayhours < 9 ? "0" : "") + wednesdayhours + "." + (wednesdayminutes < 9 ? "0" : "") + wednesdayminutes;
+
+
+ThursdayTimeIn = document.Timesheet.ThursdayTimeIn.value;
+ThursdayTimeIn = ThursdayTimeIn.split(":"); 
+var thursdaystartDate = new Date(0, 0, 0, ThursdayTimeIn[0], ThursdayTimeIn[1], 0); if ((ThursdayTimeIn[0] > 24) || (ThursdayTimeIn[1] > 59)) {errMsg=6} 
+ThursdayTimeOut = document.Timesheet.ThursdayTimeOut.value;   
+ThursdayTimeOut = ThursdayTimeOut.split(":");
+var thursdayendDate = new Date(0, 0, 0, ThursdayTimeOut[0], ThursdayTimeOut[1], 0); if ((ThursdayTimeOut[0] > 24) || (ThursdayTimeOut[1] > 59)) {errMsg=7}
+var thursdaydiff = thursdayendDate.getTime() - thursdaystartDate.getTime();
+var thursdayhours = Math.floor(thursdaydiff / 1000 / 60 / 60);
+thursdaydiff -= thursdayhours * 1000 * 60 * 60;
+var thursdayminutes = Math.floor(thursdaydiff / 1000 / 60);
+document.Timesheet.Thursday.value = (thursdayhours < 9 ? "0" : "") + thursdayhours + "." + (thursdayminutes < 9 ? "0" : "") + thursdayminutes;
+
+
+FridayTimeIn = document.Timesheet.FridayTimeIn.value;
+FridayTimeIn = FridayTimeIn.split(":"); 
+var fridaystartDate = new Date(0, 0, 0, FridayTimeIn[0], FridayTimeIn[1], 0); if ((FridayTimeIn[0] > 24) || (FridayTimeIn[1] > 59)) {errMsg=8} 
+FridayTimeOut = document.Timesheet.FridayTimeOut.value;   
+FridayTimeOut = FridayTimeOut.split(":");
+var fridayendDate = new Date(0, 0, 0, FridayTimeOut[0], FridayTimeOut[1], 0); if ((FridayTimeOut[0] > 24) || (FridayTimeOut[1] > 59)) {errMsg=9}
+var fridaydiff = fridayendDate.getTime() - fridaystartDate.getTime();
+var fridayhours = Math.floor(fridaydiff / 1000 / 60 / 60);
+fridaydiff -= fridayhours * 1000 * 60 * 60;
+var fridayminutes = Math.floor(fridaydiff / 1000 / 60);
+document.Timesheet.Friday.value = (fridayhours < 9 ? "0" : "") + fridayhours + "." + (fridayminutes < 9 ? "0" : "") + fridayminutes;
+
+
+SaturdayTimeIn = document.Timesheet.SaturdayTimeIn.value;
+SaturdayTimeIn = SaturdayTimeIn.split(":"); 
+var saturdaystartDate = new Date(0, 0, 0, SaturdayTimeIn[0], SaturdayTimeIn[1], 0); if ((SaturdayTimeIn[0] > 24) || (SaturdayTimeIn[1] > 59)) {errMsg=10} 
+SaturdayTimeOut = document.Timesheet.SaturdayTimeOut.value;   
+SaturdayTimeOut = SaturdayTimeOut.split(":");
+var saturdayendDate = new Date(0, 0, 0, SaturdayTimeOut[0], SaturdayTimeOut[1], 0); if ((SaturdayTimeOut[0] > 24) || (SaturdayTimeOut[1] > 59)) {errMsg=11}
+var saturdaydiff = saturdayendDate.getTime() - saturdaystartDate.getTime();
+ var saturdayhours = Math.floor(saturdaydiff / 1000 / 60 / 60);
+ saturdaydiff -= saturdayhours * 1000 * 60 * 60;
+ var saturdayminutes = Math.floor(saturdaydiff / 1000 / 60);
+ document.Timesheet.Saturday.value = (saturdayhours < 9 ? "0" : "") + saturdayhours + "." + (saturdayminutes < 9 ? "0" : "") + saturdayminutes;
+
+
+SundayTimeIn = document.Timesheet.SundayTimeIn.value;
+SundayTimeIn = SundayTimeIn.split(":"); 
+var sundaystartDate = new Date(0, 0, 0, SundayTimeIn[0], SundayTimeIn[1], 0); if ((SundayTimeIn[0] > 24) || (SundayTimeIn[1] > 59)) {errMsg=12} 
+SundayTimeOut = document.Timesheet.SundayTimeOut.value;   
+SundayTimeOut = SundayTimeOut.split(":");
+var sundayendDate = new Date(0, 0, 0, SundayTimeOut[0], SundayTimeOut[1], 0); if ((SundayTimeOut[0] > 24) || (SundayTimeOut[1] > 59)) {errMsg=13}
+var sundaydiff = sundayendDate.getTime() - sundaystartDate.getTime();
+ var sundayhours = Math.floor(sundaydiff / 1000 / 60 / 60);
+ sundaydiff -= sundayhours * 1000 * 60 * 60;
+  var sundayminutes = Math.floor(sundaydiff / 1000 / 60);
+  document.Timesheet.Sunday.value = (sundayhours < 9 ? "0" : "") + sundayhours + "." + (sundayminutes < 9 ? "0" : "") + sundayminutes;
+
+
+  if (errMsg != -1) { 
+    alert(StartEnd[errMsg]+' entry is too large'); 
+    document.Timesheet.StartEnd[errMsg].value = ''; 
+   document.getElementById(StartEnd[errMsg]).value=''; 
+   document.getElementById(StartEnd[errMsg]).focus(); 
+return; 
+  } 
+  
+////////////////////////////////////////////////////////////////////////////////////////////// 
+
+  var DayEntry = new Array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'); 
+  Monday = document.Timesheet.Monday.value;
+  Tuesday = document.Timesheet.Tuesday.value;
+  Wednesday = document.Timesheet.Wednesday.value;
+  Thursday = document.Timesheet.Thursday.value;
+  Friday = document.Timesheet.Friday.value;
+  Saturday = document.Timesheet.Saturday.value;
+  Sunday = document.Timesheet.Sunday.value;
+  var RptTime = ((Monday*1)+(Tuesday*1)+(Wednesday*1)+(Thursday*1)+(Friday*1)+(Saturday*1)+(Sunday*1)); 
+  document.Timesheet.Total.value = RptTime.toFixed(2); 
+  var Frac = 0; 
+  var Full = parseInt(RptTime); 
+  RptTimeFrac = RptTime - Full; 
+  if (RptTimeFrac < 0.25) { Frac = 0; }  
+  else { if (RptTimeFrac < 0.5) { Frac = 0.25; } 
+         else { if (RptTimeFrac < 0.75) { Frac = 0.5; } 
+                else { Frac = 0.75; } 
+              } 
+       } 
+  document.Timesheet.ReportTime.value = (Full+Frac).toFixed(2); 
+}
+////////////////////////////////////////////////////////////////////////////////////////////// 
+
+function myFunction() {
+    window.print();
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////// 
+
+</script> 
+<footer class="w3-container w3-black">
+  <h5 class="w3-medium">&copy; 2017 <a href="#"class="w3-hover-text-blue">Timesheet.com</a></h5>
+</footer>
+</div> 
+</body> 
+</html>  
